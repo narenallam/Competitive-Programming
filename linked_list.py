@@ -34,6 +34,9 @@ class LinkedList:
     def remove(self, _data):
         pass
 
+    def clear(self):
+        pass
+
     def __str__(self):
         _head = self.head
         s = "head -> "
