@@ -40,26 +40,35 @@ class LinkedList:
             new_node.next = tmp.next
             tmp.next = new_node
 
+        self.count += 1
+
     def pop(self, pos=None):
-        if not pos:
-            _ptr = self.head
-            for _ in range(self.count-2):
-                _ptr = _ptr.next
-            tmp = _ptr.next
-            _ptr.next = None
-            self.tail = _ptr
+        if self.count:
+            if pos is None or pos >= self.count:
+                _ptr = self.head
+                for _ in range(self.count-2):
+                    _ptr = _ptr.next
+                tmp = _ptr.next
+                _ptr.next = None
+                self.tail = _ptr
 
-        elif 0 < pos < self.count:
-            _ptr = self.head
-            for _ in range(pos-1):
-                _ptr = _ptr.next
-            tmp = _ptr.next
-            _ptr.next = None
+            elif pos == 0:
+                tmp = self.head
+                self.head = self.head.next
 
-        _data = tmp.data
-        del tmp
-        self.count -= 1
-        return _data
+            elif 0 < pos < self.count:
+                _ptr = self.head
+                for _ in range(pos-1):
+                    _ptr = _ptr.next
+                if pos == self.count - 1:
+                    self.tail = _ptr
+                tmp = _ptr.next
+                _ptr.next = None
+
+            _data = tmp.data
+            del tmp
+            self.count -= 1
+            return _data
 
     def remove(self, _data):
         pass
@@ -86,11 +95,3 @@ class LinkedList:
             _head = _head.next
 
         return f"LinkedList([{', '.join(l)}])"
-
-
-if __name__ == '__main__':
-    ll = LinkedList([5, 6, 2, 4,  8, 1, 9])
-    # ll.insert(66, 3)
-    print(ll.pop())
-    print(ll.pop())
-    print(ll)
