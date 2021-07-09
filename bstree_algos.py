@@ -66,5 +66,5 @@ def level_order(_root):
             if node.right:
                 q.enque(node.right)
 
-mirror_image()
+
 
