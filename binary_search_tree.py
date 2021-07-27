@@ -1,5 +1,5 @@
-from queue import Queue
-from stack import Stack
+from simple_queue import Queue
+from simple_stack import Stack
 
 
 class Node:

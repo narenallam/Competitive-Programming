@@ -1,5 +1,5 @@
-from queue import Queue
-from stack import Stack
+from simple_queue import Queue
+from simple_stack import Stack
 
 class Graph:
     def __init__(self, edges):
@@ -27,7 +27,6 @@ class Graph:
     def bfs(self):
         q = Queue()
         visited = set()
-
         for v in self.adjacency_list:
             if v not in visited:
                 q.enque(v)
@@ -55,10 +54,24 @@ class Graph:
                             s.push(y)
                             visited.add(y)
 
-g = Graph([('A', 'B'), ('A', 'D'), ('B', 'D'), ('C', 'E')])
+    def shortest_paths_uwg(self, start_v):
+        q = Queue()
+        q.enque(start_v)
+        distance_table = {}
+
+        for v in self.adjacency_list:
+            distance_table[v] = [-1, None]
+        distance_table[start_v] = 0
+
+        while not q.empty():
+            v = q.deque()
+
+g = Graph([('C', 'A'), ('A', 'C'), ('B', 'D'), ('C', 'E'), ('C', 'F')])
+g = Graph([('A', 'B'), ('A', 'C'), ('B', 'D'), ('C', 'E'), ('C', 'F')])
 g.bfs()
 print()
 g.dfs()
+
 
 
 

@@ -1,5 +1,5 @@
 from binary_search_tree import BinarySearchTree, Node
-from queue import Queue
+from simple_queue import Queue
 
 
 def side_view():
