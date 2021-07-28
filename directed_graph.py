@@ -104,7 +104,7 @@ class UWGraph:
 
         q = Queue()
         q.enque(start_v)
-
+        path_exists = False
         while not q.empty():
             v = q.deque()
             cur_vertex = self.adjacency_set[v]
@@ -113,30 +113,38 @@ class UWGraph:
                     node.distance = cur_vertex.distance + 1
                     node.prev = cur_vertex
                     q.enque(node.value)
-                    # if node.value == end_v:
-                    #     q.clear()
-                    #     break
+                    if node.value == end_v:
+                        q.clear()
+                        path_exists = True
+                        break
+
         print("------ Distance Table ------")
+
         for v in self.adjacency_set.values():
             print(v.value, '->', v.distance, ':', v.prev)
 
         print(f"------ Shortest Path to {end_v} ------")
-        node = self.adjacency_set[end_v]
-        path = []
-        while node:
-            path.append(node)
-            node = node.prev
-        path.reverse()
-        print(path)
+        if path_exists:
+
+            node = self.adjacency_set[end_v]
+            path = []
+            while node:
+                path.append(node)
+                node = node.prev
+            path.reverse()
+            print(path)
+        else:
+            print("Oops! Vertices Not Connected")
+
 
 if __name__ == '__main__':
 
-    g = UWGraph([('C', 'A'), ('C', 'F'), ('A', 'B'), ('A', 'D'), ('D', 'F'), ('D', 'G'), ('B', 'D'), ('B', 'E'), ('G', 'F')])
+    g = UWGraph([('C', 'A'), ('C', 'F'), ('C', 'Z'), ('A', 'B'), ('A', 'D'), ('D', 'F'), ('D', 'G'), ('B', 'D'), ('B', 'E'), ('G', 'F')])
     # g = Graph([('A', 'B'), ('A', 'C'), ('B', 'D'), ('C', 'E'), ('C', 'F')])
     g.print_graph()
     g.bfs()
     g.dfs()
-    g.shortest_path_uwg('C', 'E')
+    g.shortest_path_uwg('F', 'Z')
 
 
 
