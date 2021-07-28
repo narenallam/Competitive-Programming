@@ -11,7 +11,7 @@ class Vertex:
         self.out_degree = 0
         self.neighbors = set()
         self.distance = infinity # distance from source vertex
-        self.prev = None
+        self.prev = None # visited from
 
     def __hash__(self):
         return hash(self.value)
@@ -123,7 +123,7 @@ class UWGraph:
         for v in self.adjacency_set.values():
             print(v.value, '->', v.distance, ':', v.prev)
 
-        print(f"------ Shortest Path to {end_v} ------")
+        print(f"------ Shortest Path from {start_v} to {end_v} ------")
         if path_exists:
 
             node = self.adjacency_set[end_v]
@@ -139,12 +139,15 @@ class UWGraph:
 
 if __name__ == '__main__':
 
-    g = UWGraph([('C', 'A'), ('C', 'F'), ('C', 'Z'), ('A', 'B'), ('A', 'D'), ('D', 'F'), ('D', 'G'), ('B', 'D'), ('B', 'E'), ('G', 'F')])
+    g = UWGraph([('C', 'A'), ('C', 'F'), ('C', 'Z'),
+                 ('A', 'B'), ('A', 'D'), ('D', 'F'),
+                 ('D', 'G'), ('B', 'D'), ('B', 'E'), ('G', 'F')])
     # g = Graph([('A', 'B'), ('A', 'C'), ('B', 'D'), ('C', 'E'), ('C', 'F')])
     g.print_graph()
     g.bfs()
     g.dfs()
-    g.shortest_path_uwg('F', 'Z')
+    g.shortest_path_uwg('C', 'E')
+
 
 
 
