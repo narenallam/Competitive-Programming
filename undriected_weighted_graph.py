@@ -70,6 +70,7 @@ class Graph:
         visited = set()
 
         while not q.empty():
+
             v = q.deque()
             for neighbour in self.graph[v]:
                 if neighbour not in visited:
