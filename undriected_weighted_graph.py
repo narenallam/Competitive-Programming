@@ -80,7 +80,7 @@ class Graph:
                     prev_min_distance = self.distance_table[neighbour]['distance']
                     if cur_distance < prev_min_distance:
 
-                        self.distance_table[neighbour]['distance'] = self.graph[v][neighbour]
+                        self.distance_table[neighbour]['distance'] = cur_distance
 
                 self.distance_table[neighbour]['prev'] = v
                 q.enque(neighbour)
