@@ -67,7 +67,7 @@ class Graph:
             self.distance_table[vertex]['prev'] = None
 
         self.distance_table[start_v]['distance'] = 0
-
+        print(self.distance_table)
         q = []
         heapq.heapify(q)
         heapq.heappush(q, (0, start_v))
@@ -110,8 +110,8 @@ if __name__ == '__main__':
                  ('D', 'G', 5), ('B', 'D', 1), ('B', 'E', 7), ('G', 'F', 2)])
 
     g.print_graph()
-    # g.bfs()
-    # g.dfs()
+    g.bfs()
+    g.dfs()
     g.shortest_path('C', 'G')
 
 
