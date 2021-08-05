@@ -1,6 +1,8 @@
-from simple_queue import Queue
-from simple_stack import Stack
+from simple_queue import SimpleQueue
+from simple_stack import SimpleStack
 from collections import defaultdict
+import heapq
+
 infinity = float('inf')
 
 
@@ -18,7 +20,7 @@ class Graph:
         self.graph[d][s] = wt
 
     def bfs(self):
-        q = Queue()
+        q = SimpleQueue()
         visited = set()
         print("---------- BFS -------------")
         for v in self.graph:
@@ -35,7 +37,7 @@ class Graph:
         print()
 
     def dfs(self):
-        s = Stack()
+        s = SimpleStack()
         visited = set()
         print("---------- DFS -------------")
         for v in self.graph:
@@ -56,42 +58,49 @@ class Graph:
         for vertex, neighbours in self.graph.items():
             print(vertex + " --> " + str(neighbours))
 
+    # Dijkstra's Algorithm
     def shortest_path(self, start_v, end_v):
         # distance and prev vertex initialisation
 
         for vertex in self.graph:
             self.distance_table[vertex]['distance'] = infinity
-            self.distance_table[vertex]['Prev'] = None
+            self.distance_table[vertex]['prev'] = None
 
         self.distance_table[start_v]['distance'] = 0
 
-        q = Queue()
-        q.enque(start_v)
+        q = []
+        heapq.heapify(q)
+        heapq.heappush(q, (0, start_v))
         visited = set()
 
-        while not q.empty():
+        while q:
+            d, v = heapq.heappop(q)
+            if v not in visited:
+                for neighbour in self.graph[v]:
 
-            v = q.deque()
-            for neighbour in self.graph[v]:
-                if neighbour not in visited:
-                    self.distance_table[neighbour]['distance'] = self.graph[v][neighbour]
-                else:
-                    cur_distance = self.distance_table[v]['distance'] + self.graph[v][neighbour]
-                    prev_min_distance = self.distance_table[neighbour]['distance']
-                    if cur_distance < prev_min_distance:
+                    if neighbour not in visited:
+                        cur_distance = self.distance_table[v]['distance'] + self.graph[v][neighbour]
+                        prev_distance = self.distance_table[neighbour]['distance']
+                        if cur_distance < prev_distance:
+                            self.distance_table[neighbour]['distance'] = cur_distance
+                            self.distance_table[neighbour]['prev'] = v
+                            heapq.heappush(q, (cur_distance, neighbour))
 
-                        self.distance_table[neighbour]['distance'] = cur_distance
-
-                self.distance_table[neighbour]['prev'] = v
-                q.enque(neighbour)
-            visited.add(v)
+                visited.add(v)
 
         print("------ Distance Table ------")
+
         for vertex in self.distance_table:
-            print(vertex, self.distance_table[v]['distance'],  self.distance_table[v]['prev'])
+            print(vertex, self.distance_table[vertex]['distance'],  self.distance_table[vertex]['prev'])
 
         print(f"------ Shortest Path from {start_v} to {end_v} ------")
-
+        path = []
+        node = end_v
+        while node:
+            path.append(node)
+            node = self.distance_table[node]['prev']
+        path.reverse()
+        print('->'.join(path))
 
 
 if __name__ == '__main__':
@@ -99,10 +108,10 @@ if __name__ == '__main__':
     g = Graph([('C', 'A', 2), ('C', 'F', 2), ('C', 'Z', 4),
                  ('A', 'B', 1), ('A', 'D', 3), ('D', 'F', 1),
                  ('D', 'G', 5), ('B', 'D', 1), ('B', 'E', 7), ('G', 'F', 2)])
-    # g = Graph([('A', 'B'), ('A', 'C'), ('B', 'D'), ('C', 'E'), ('C', 'F')])
+
     g.print_graph()
-    g.bfs()
-    g.dfs()
+    # g.bfs()
+    # g.dfs()
     g.shortest_path('C', 'G')
 
 

@@ -1,4 +1,4 @@
-class Stack:
+class SimpleStack:
     def __init__(self):
         self.stack = []
 
