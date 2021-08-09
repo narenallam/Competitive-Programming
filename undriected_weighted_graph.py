@@ -86,7 +86,7 @@ class Graph:
                             self.distance_table[neighbour]['prev'] = v
                             heapq.heappush(q, (cur_distance, neighbour))
 
-                visited.add(v)
+                    visited.add(v)
 
         print("------ Distance Table ------")
 
