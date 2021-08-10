@@ -105,14 +105,15 @@ class Graph:
 
 if __name__ == '__main__':
 
-    g = Graph([('C', 'A', 2), ('C', 'F', 2), ('C', 'Z', 4),
-                 ('A', 'B', 1), ('A', 'D', 3), ('D', 'F', 1),
-                 ('D', 'G', 5), ('B', 'D', 1), ('B', 'E', 7), ('G', 'F', 2)])
-
+    # # g = Graph([('C', 'A', 2), ('C', 'F', 2), ('C', 'Z', 4),
+    #              ('A', 'B', 1), ('A', 'D', 3), ('D', 'F', 1),
+    #              ('D', 'G', 5), ('B', 'D', 1), ('B', 'E', 7), ('G', 'F', 2)])
+    g = Graph([('A', 'B', 3), ('A', 'C', 5), ('B', 'C', 1), ('C', 'F', 3), ('A', 'E', 2), ('E', 'F', 4)])
     g.print_graph()
-    g.bfs()
-    g.dfs()
-    g.shortest_path('C', 'G')
+    # g.bfs()
+    # g.dfs()
+    # g.shortest_path(C', 'G')
+    g.shortest_path('A', 'F')
 
 
 
