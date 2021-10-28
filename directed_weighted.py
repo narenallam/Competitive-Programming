@@ -17,7 +17,7 @@ class Graph:
     def add_edge(self, edge):
         s, d, wt = edge
         self.graph[s][d] = wt
-        self.graph[d][s] = wt
+
 
     def bfs(self):
         q = SimpleQueue()

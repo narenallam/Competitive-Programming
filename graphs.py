@@ -1,5 +1,5 @@
-from simple_queue import Queue
-from simple_stack import Stack
+from simple_queue import SimpleQueue
+from simple_stack import SimpleStack
 
 class Graph:
     def __init__(self, edges):
@@ -25,7 +25,7 @@ class Graph:
 
 
     def bfs(self):
-        q = Queue()
+        q = SimpleQueue()
         visited = set()
         for v in self.adjacency_list:
             if v not in visited:
@@ -40,7 +40,7 @@ class Graph:
                             visited.add(y)
 
     def dfs(self):
-        s = Stack()
+        s = SimpleStack()
         visited = set()
         for v in self.adjacency_list:
             if v not in visited:
